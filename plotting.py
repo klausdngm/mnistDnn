@@ -36,7 +36,7 @@ def display_digit_and_predictions(image, label, pred, pred_one_hot):
 def display_convergence_error(train_losses, valid_losses):
     if len(valid_losses) > 0:
         plt.plot(range(len(train_losses)), train_losses, color="red")
-        plt.plot(range(len(valid_losses)), valid_losses, color="red")
+        plt.plot(range(len(valid_losses)), valid_losses, color="blue")
         plt.legend(["Train", "Valid"])
     else:
         plt.plot(range(len(train_losses)), train_losses, color="red")
@@ -45,7 +45,7 @@ def display_convergence_error(train_losses, valid_losses):
     plt.ylabel('Loss')
     plt.show()
 
-# Display the convergence of accs
+# Display the convergence of the accs
 def display_convergence_acc(train_accs, valid_accs):
     if len(valid_accs) > 0:
         plt.plot(range(len(train_accs)), train_accs, color="red")
@@ -54,9 +54,9 @@ def display_convergence_acc(train_accs, valid_accs):
     else:
         plt.plot(range(len(train_accs)), train_accs, color="red")
         plt.legend(["Train"])
-        plt.xlabel('Epoch')
-        plt.ylabel('Accuracy')
-        plt.show()
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.show()
 
 # Plot confusion matrix
 def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion matrix', cmpa=plt.cm.Blues):
