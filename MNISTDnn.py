@@ -54,6 +54,29 @@ class Model:
     def get_variables(self):
         return {var.name: var.numpy() for var in self.variables}
 
+    def get_num_trainable_parameter(self, nodes):
+        num_weights = 0
+        num_biases = 0
+        last_layer_num_nodes = nodes[0]
+        for idx, layer_num_nodes in enumerate(nodes[1:]):
+            if idx == 0:
+                print("Input to Hidden Layer:")
+            elif idx == len(nodes)-1:
+                print("Hidden to Output Layer:")
+            else:
+                print("Hidden to Hidden Layer")
+            weights_layer = last_layer_num_nodes * layer_num_nodes
+            biases_layer = layer_num_nodes
+            print("\tWights: ", weights_layer)
+            print("\tBiases: ", biases_layer)
+            num_weights += weights_layer
+            num_biases += biases_layer
+            last_layer_num_nodes = layer_num_nodes
+        trainable_parameters = num_weights + num_biases
+        print("Overall trainable parameters: ", trainable_parameters)
+
+
+
     def predict(self, x):
         input_layer = x
         # h = (x*W1) + b1
@@ -120,6 +143,7 @@ class Model:
         print("Loss: ", round(loss, 4), " Metric: ", round(metric, 4))
 
 model = Model()
+model.get_num_trainable_parameter(nodes)
 model.fit(x_train, y_train, x_test, y_test, epochs=epochs)
 model.evaluate(x_test, y_test)
 
